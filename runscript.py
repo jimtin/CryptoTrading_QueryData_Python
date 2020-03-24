@@ -34,7 +34,10 @@ def getdata(splunksettings):
     splunkdestination.sendtosplunk(binancedata, "binance", splunksettings)
     # Get CoinbaseData
     print("Getting coinbase data " + str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
-    coinbasedata = coinbaselibrary.combinespotprices()
+    coinbaselist = ["BTC-USD", "ETH-USD", "XRP-USD", "BCH-USD", "BSV-USD", "LTC-USD", "EOS-USD", "XTZ-USD", "XLM-USD",
+                    "LINK-USD", "DASH-USD", "ETC-USD", "ATOM-USD", "ZEC-USD", "BAT-USD", "ZRX-USD", "REP-USD", "KNC-USD",
+                    "DAI-USD"]
+    coinbasedata = coinbaselibrary.getlistfromcoinbase(coinbaselist)
     splunkdestination.sendtosplunk(coinbasedata, "coinbase", splunksettings)
 
 

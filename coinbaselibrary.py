@@ -1,5 +1,7 @@
 import requests
 import json
+from time import sleep
+import splunkdestination
 
 # Library to get basic prices from coinbase
 
@@ -47,4 +49,16 @@ def combinespotprices():
     spotprices.append(eth)
     return spotprices
 
+
+# Function to get a list of Coinbase currencies
+def getlistfromcoinbase(list):
+    spotprices = []
+    for currencypair in list:
+        print("Getting: " + currencypair)
+        token = getspotpricecoinbase(currencypair)
+        token = json.loads(token)
+        spotprices.append(token["data"])
+        # Coinbase has an API limit of 3 requests per second
+        sleep(0.5)
+    return spotprices
 
